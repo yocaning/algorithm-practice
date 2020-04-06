@@ -57,7 +57,7 @@ public class ReverseLinked {
      */
     public static class ListNode {
         private Integer value;
-        private ListNode next;
+        private ListNode next ;
 
         public ListNode(Integer value) {
             this.value = value;
