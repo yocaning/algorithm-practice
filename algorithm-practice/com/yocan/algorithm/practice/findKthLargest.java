@@ -16,6 +16,8 @@ public class findKthLargest {
     /**
      * 排序后取值
      * 1.选用快排
+     * 快排的时间复杂度
+     * 期望复杂度是O(nlogn)，但最坏情况下可能就会变成O(n^2)
      * @param nums
      * @param k
      * @return
@@ -52,8 +54,8 @@ public class findKthLargest {
     }
 
     public static void main(String[] args) {
-        int[] ints = {5,6,7,8,4,2,3};
-        System.out.println(findKthLargest(ints,-1));
+        int[] ints = {5,6,7,8,9};
+        System.out.println(findKthLargest(ints,5));
         /**
          *  示例 1:
          *       输入: [3,2,1,5,6,4] 和 k = 2

@@ -13,6 +13,7 @@ import java.util.Arrays;
  * 说明:
  *      你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。
  *      Related Topics 堆 分治算法
+ *      堆排序是一种选择排序，它的最坏，最好，平均时间复杂度均为O(nlogn)
  */
 public class HeapSort {
 
@@ -47,7 +48,7 @@ public class HeapSort {
         System.out.println("实际输出"+ints2[3]);
     }
     /**
-     * 构建小顶堆，降序
+     * 此处构建小顶堆
      * @param ints 需排序数组
      * @param length  一个多大堆
      */
@@ -56,6 +57,7 @@ public class HeapSort {
                 adjustHeap(ints,i,length);
         }
         //将头尾交换，然后重新构造一个新的堆，长度减一
+        //构建新的数组，降序
         while (length>0){
             swapArray(ints,0,length-1);
             length--;
