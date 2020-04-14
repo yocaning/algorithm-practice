@@ -1,9 +1,5 @@
 package com.yocan.algorithm.practice;
 
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.Arrays;
 
 /**
