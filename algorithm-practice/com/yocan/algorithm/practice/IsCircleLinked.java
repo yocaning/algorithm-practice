@@ -7,7 +7,6 @@ package com.yocan.algorithm.practice;
  */
 public class IsCircleLinked {
 
-
     private static boolean isCircle(ReverseLinked.ListNode listNode) {
         boolean flag = false;
         ReverseLinked.ListNode listNode1 = listNode;

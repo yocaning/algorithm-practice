@@ -49,7 +49,6 @@ public class LongestPalindrome {
         //自我测试
         String str =findLongestPalindrome("dddd");
         System.out.println(str.equals("dddd"));
-
         /**
          * 测试用例1
          * "cccbabddf"
