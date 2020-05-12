@@ -26,16 +26,6 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
 //            firstMessage.writeByte((byte) i);
 //        }
     }
-    private String getMessage(ByteBuf buf) {
-        byte[] con = new byte[buf.readableBytes()];
-        buf.readBytes(con);
-        try {
-            return new String(con, "UTF8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     private void sendMessage(ChannelHandlerContext ctx){
         Scanner scanner =new Scanner(System.in);
@@ -62,7 +52,7 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
 //        ctx.write(msg);
         ByteBuf buf = (ByteBuf) msg;
-        String rev = getMessage(buf);
+        String rev = NettyUtil.getMessage(buf);
         System.err.println("客户端收到服务器消息:" + rev);
 
         sendMessage(ctx);
