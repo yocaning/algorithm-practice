@@ -4,6 +4,9 @@ import io.netty.buffer.ByteBuf;
 
 import java.io.UnsupportedEncodingException;
 
+/**
+ * @author liuyongkang
+ */
 public class NettyUtil {
 
     static String getMessage(ByteBuf buf) {
