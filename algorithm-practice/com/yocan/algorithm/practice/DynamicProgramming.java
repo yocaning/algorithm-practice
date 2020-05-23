@@ -13,7 +13,7 @@ public class DynamicProgramming {
 
     private static List<Integer> moneyArray =new ArrayList<Integer>(Arrays.asList(1,5,11,20,50,100));
 
-    private static Map<Integer,Integer> moneyMap =new HashMap<>();
+    private static Map<Integer,Integer> moneyMap =new HashMap<Integer, Integer>();
 
 
     private static Integer moneyCount(int money){

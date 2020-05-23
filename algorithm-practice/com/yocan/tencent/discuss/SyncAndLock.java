@@ -42,6 +42,11 @@ import java.util.concurrent.locks.ReentrantLock;
  *
  *  由于单机能创建线程有限，所以无法继续测试
  *
+ *  切换jdk5 sync耗时-83164->1590249194393
+ *  Lock耗时-82935->1590249277328
+ *
+ *  感觉有问题
+ *
  */
 public class SyncAndLock {
 
