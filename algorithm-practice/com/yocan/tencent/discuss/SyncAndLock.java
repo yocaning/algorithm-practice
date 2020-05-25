@@ -1,5 +1,7 @@
 package com.yocan.tencent.discuss;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -45,27 +47,34 @@ import java.util.concurrent.locks.ReentrantLock;
  *  切换jdk5 sync耗时-83164->1590249194393
  *  Lock耗时-82935->1590249277328
  *
+ * sync耗时-95375->1590374807323
+ * Lock耗时-92946->1590374900269
+ *
  *  感觉有问题
  *
  */
 public class SyncAndLock {
 
-    private static final Integer o =1;
+    private static final List<Integer> o =new ArrayList<>();
     private static ReentrantLock reentrantLock =new ReentrantLock(true);
 
-    private void addMethodBySync() throws InterruptedException {
+    private void addMethodBySync(int num) throws InterruptedException {
+        System.out.println(Thread.currentThread().getName()+Thread.currentThread().getState().name());
         synchronized(o){
             //模拟消耗20ms
+            o.add(num);
             Thread.sleep(20);
-            System.out.println(o+"Sync-"+Thread.currentThread()+System.currentTimeMillis());
+            System.out.println("Sync-"+Thread.currentThread()+System.currentTimeMillis());
         }
     }
 
-    private void addMethodByLock(){
+    private void addMethodByLock(int num){
+        System.out.println(Thread.currentThread().getName()+Thread.currentThread().getState().name());
+        reentrantLock.lock();
         try {
-            reentrantLock.lock();
             Thread.sleep(20);
-            System.out.println(o+"Lock-"+Thread.currentThread()+System.currentTimeMillis());
+            o.add(num);
+            System.out.println("Lock-"+Thread.currentThread()+System.currentTimeMillis());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
@@ -81,6 +90,7 @@ public class SyncAndLock {
         final CountDownLatch endCountDownLatch =new CountDownLatch(4000);
         final CountDownLatch countDownLatch =new CountDownLatch(1);
         for (int i=0;i<threadNum;i++){
+            final int finalI = i;
             new Thread(){
                 @Override
                 public void run(){
@@ -91,12 +101,12 @@ public class SyncAndLock {
                     }
                     if (method){
                         try {
-                            addMethodBySync();
+                            addMethodBySync(finalI);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }else {
-                        addMethodByLock();
+                        addMethodByLock(finalI);
                     }
                     endCountDownLatch.countDown();
                 }
