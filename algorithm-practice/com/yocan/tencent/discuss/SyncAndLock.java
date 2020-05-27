@@ -59,7 +59,6 @@ public class SyncAndLock {
     private static ReentrantLock reentrantLock =new ReentrantLock(true);
 
     private void addMethodBySync(int num) throws InterruptedException {
-        System.out.println(Thread.currentThread().getName()+Thread.currentThread().getState().name());
         synchronized(o){
             //模拟消耗20ms
             o.add(num);
@@ -69,7 +68,6 @@ public class SyncAndLock {
     }
 
     private void addMethodByLock(int num){
-        System.out.println(Thread.currentThread().getName()+Thread.currentThread().getState().name());
         reentrantLock.lock();
         try {
             Thread.sleep(20);
@@ -80,7 +78,6 @@ public class SyncAndLock {
         } finally {
             reentrantLock.unlock();
         }
-
     }
 
     /**
