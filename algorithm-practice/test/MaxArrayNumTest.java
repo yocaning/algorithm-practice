@@ -5,9 +5,12 @@ import com.yocan.algorithm.practice.MaxArrayNum;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-public class TestMaxArrayNum {
+/**
+ * @author liuyongkang
+ */
+public class MaxArrayNumTest {
 
-    MaxArrayNum maxArrayNum =new MaxArrayNum();
+    private MaxArrayNum maxArrayNum =new MaxArrayNum();
 
     /**
      * 全负数数组

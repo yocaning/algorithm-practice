@@ -26,3 +26,7 @@
 - ClassLoadTree 实践类加载器结构相关（结论在ClassLoaderTree）
 - 测试synchronized和lock的性能对比（结论在SyncAndLock）
 - 实践interrupt线程中断
+
+## 测试用例
+
+- 连续子数组的最大和
