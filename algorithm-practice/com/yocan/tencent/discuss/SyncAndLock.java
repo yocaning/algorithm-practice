@@ -59,10 +59,9 @@ public class SyncAndLock {
     private static ReentrantLock reentrantLock =new ReentrantLock(true);
 
     private void addMethodBySync() throws InterruptedException {
-        synchronized(o){
+        synchronized(this){
             //模拟耗时
             Thread.sleep(2);
-//            System.out.println("Sync-"+Thread.currentThread()+System.currentTimeMillis());
         }
     }
 
@@ -70,7 +69,6 @@ public class SyncAndLock {
         reentrantLock.lock();
         try {
             Thread.sleep(2);
-//            System.out.println("Lock-"+Thread.currentThread()+System.currentTimeMillis());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
@@ -79,75 +77,59 @@ public class SyncAndLock {
     }
 
     /**
-     * 创造多个线程
+     * 创造多个线程=线程并发
      */
-    public  void threadsExecute(int threadNum, final boolean method) throws InterruptedException {
+    public  void threadsExecuteCurrent(int threadNum, final boolean method) throws InterruptedException {
         final CountDownLatch endCountDownLatch =new CountDownLatch(threadNum);
-//        final CountDownLatch countDownLatch =new CountDownLatch(1);
+        final CountDownLatch countDownLatch =new CountDownLatch(1);
         for (int i=0;i<threadNum;i++){
             new Thread(){
                 @Override
                 public void run(){
-//                    try {
-////                        countDownLatch.await();
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-                    if (method){
-                        try {
-                            addMethodBySync();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }else {
-                        addMethodByLock();
+                    try {
+                        countDownLatch.await();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
+                    exeMethod(method);
                     endCountDownLatch.countDown();
                 }
             }.start();
         }
 
         System.out.println("执行"+method);
-//        countDownLatch.countDown();
+        countDownLatch.countDown();
         endCountDownLatch.await();
     }
 
+    /**
+     * 创造多个线程,不一起
+     */
+    public  void threadsExecute(int threadNum,  boolean method) throws InterruptedException {
+        final CountDownLatch endCountDownLatch =new CountDownLatch(threadNum);
+        for (int i=0;i<threadNum;i++){
+            new Thread(){
+                @Override
+                public void run(){
+                    exeMethod(method);
+                    endCountDownLatch.countDown();
+                }
+            }.start();
+        }
 
+        System.out.println("执行"+method);
+        endCountDownLatch.await();
+    }
 
-
-    public static void main(String[] args) throws InterruptedException {
-        SyncAndLock syncAndLock =new SyncAndLock();
-
-        long start1 =System.currentTimeMillis();
-        syncAndLock.threadsExecute(2000,true);
-        long end1 =System.currentTimeMillis();
-        System.out.println("sync耗时-"+(end1-start1) +"->"+System.currentTimeMillis());
-
-        long start2 =System.currentTimeMillis();
-        syncAndLock.threadsExecute(2000,true);
-        long end2 =System.currentTimeMillis();
-        System.out.println("sync耗时-"+(end2-start2) +"->"+System.currentTimeMillis());
-
-        long start3 =System.currentTimeMillis();
-        syncAndLock.threadsExecute(2000,true);
-        long end3 =System.currentTimeMillis();
-        System.out.println("sync耗时-"+(end3-start3) +"->"+System.currentTimeMillis());
-
-
-        long start4 =System.currentTimeMillis();
-        syncAndLock.threadsExecute(2000,true);
-        long end4 =System.currentTimeMillis();
-        System.out.println("sync耗时-"+(end4-start4) +"->"+System.currentTimeMillis());
-
-
-        long start5 =System.currentTimeMillis();
-        syncAndLock.threadsExecute(2000,true);
-        long end5 =System.currentTimeMillis();
-        System.out.println("sync耗时-"+(end5-start5) +"->"+System.currentTimeMillis());
-
-//        long start2 =System.currentTimeMillis();
-//        syncAndLock.threadsExecute(4000,false);
-//        long end2 =System.currentTimeMillis();
-//        System.out.println("Lock耗时-"+(end2-start2) +"->"+System.currentTimeMillis());
+    private void exeMethod(boolean method){
+        if (method){
+            try {
+                addMethodBySync();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }else {
+            addMethodByLock();
+        }
     }
 }
