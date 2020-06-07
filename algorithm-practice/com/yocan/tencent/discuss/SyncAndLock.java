@@ -1,7 +1,5 @@
 package com.yocan.tencent.discuss;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -55,7 +53,12 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class SyncAndLock {
 
-    private static final List<Integer> o =new ArrayList<>();
+    static {
+        System.out.println(System.currentTimeMillis());
+        final CountDownLatch endCountDownLatch =new CountDownLatch(1);
+    }
+
+//    private static final List<Integer> o =new ArrayList<>();
     private static ReentrantLock reentrantLock =new ReentrantLock(true);
 
     private void addMethodBySync() throws InterruptedException {
@@ -105,7 +108,7 @@ public class SyncAndLock {
     /**
      * 创造多个线程,不一起
      */
-    public  void threadsExecute(int threadNum,  boolean method) throws InterruptedException {
+    public  void threadsExecute(int threadNum, final boolean method) throws InterruptedException {
         final CountDownLatch endCountDownLatch =new CountDownLatch(threadNum);
         for (int i=0;i<threadNum;i++){
             new Thread(){
