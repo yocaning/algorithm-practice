@@ -58,7 +58,6 @@ public class SyncAndLock {
         final CountDownLatch endCountDownLatch =new CountDownLatch(1);
     }
 
-//    private static final List<Integer> o =new ArrayList<>();
     private static ReentrantLock reentrantLock =new ReentrantLock(true);
 
     private void addMethodBySync() throws InterruptedException {

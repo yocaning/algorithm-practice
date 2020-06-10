@@ -184,7 +184,7 @@ public class SyncAndLockTest {
 
     /**
      *
-     * 50线程-160 130
+     * 2000线程-160 130
      * @throws InterruptedException
      */
     @Test
