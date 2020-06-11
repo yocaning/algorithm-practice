@@ -4,6 +4,7 @@ package com.yocan.algorithm.practice;
  * @author liuyongkang
  * 根据每日 气温 列表，请重新生成一个列表，
  * 对应位置的输出是需要再等待多久温度才会升高超过该日的天数。如果之后都不会升高，请在该位置用 0 来代替。
+ * 测试用例使用的是https://leetcode-cn.com/problems/daily-temperatures/submissions/
  */
 public class DailyTemperaturesSolution {
 
