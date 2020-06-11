@@ -84,7 +84,32 @@ public class DailyTemperaturesSolution {
         return result;
     }
 
-
+    /**
+     * 性能优化版
+     * 倒过来就可以了，利用结果更多
+     * 时间：4 ms
+     * @param T
+     * @return
+     */
+    public int[] dailyTemperaturesByDesc(int[] T){
+        int[] result = new int[T.length];
+        //最后一个数必为0，所以不用管
+        for (int i=T.length-2;i>=0;i--){
+            int temp = 1;
+            while (true){
+                int j=i+temp;
+                if (T[i]<T[j]){
+                    result[i]=temp;
+                    break;
+                }else if (result[j]==0){
+                    break;
+                }else {
+                    temp +=result[j];
+                }
+            }
+        }
+        return result;
+    }
 
 
 }
