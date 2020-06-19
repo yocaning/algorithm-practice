@@ -39,12 +39,6 @@ public class ReverseLinked {
         linked2.next=linked3;
         linked3.next=linked4;
         linked4.next=linked5;
-        System.out.println(linked1.value);
-        System.out.println(linked1.next.value);
-        System.out.println(linked1.next.next.value);
-        System.out.println(linked1.next.next.next.value);
-        System.out.println(linked1.next.next.next.next.value);
-
         System.out.println(linked1.toString());
         ListNode reverse =Reverse(linked1);
         System.out.println(reverse.toString());
@@ -94,6 +88,7 @@ public class ReverseLinked {
             stringBuilder.append(this.value);
             ListNode temp =this.next;
             while(temp !=null){
+                stringBuilder.append("->");
                 stringBuilder.append(temp.value);
                 temp =temp.next;
             }
