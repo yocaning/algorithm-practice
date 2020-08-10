@@ -52,6 +52,7 @@ public class HeapSort {
      * @param length  一个多大堆
      */
     private static void buildHeap(int[] ints,int length){
+        // 构建堆从leng/2-1开始
         for (int i=(length/2-1);i>=0;i--){
                 adjustHeap(ints,i,length);
         }
@@ -59,8 +60,7 @@ public class HeapSort {
         //构建新的数组，降序
         while (length>0){
             swapArray(ints,0,length-1);
-            length--;
-            adjustHeap(ints,0,length);
+            adjustHeap(ints,0,--length);
         }
     }
 
@@ -71,6 +71,7 @@ public class HeapSort {
      * @param length
      */
     private static void adjustHeap(int[] ints,int i,int length){
+        //获取左右节点 下标
             int left =i *2+1;
             int right =i *2+2;
             if (left <length &&ints[i] >ints[left]){
