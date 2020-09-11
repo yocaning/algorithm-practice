@@ -7,6 +7,24 @@
     <groupId>algorithm-practice</groupId>
     <artifactId>algorithm-practice</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>6</source>
+                    <target>6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <properties>
+        <hutool.version>5.4.2</hutool.version>
+    </properties>
+
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -28,6 +46,11 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
         </dependency>
     </dependencies>
 

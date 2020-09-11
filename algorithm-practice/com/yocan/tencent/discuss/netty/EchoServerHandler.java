@@ -14,9 +14,13 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         ByteBuf buf =((ByteBuf) msg).copy();
-        ctx.writeAndFlush(msg);
 //        ByteBuf buf =((ByteBuf) msg);
         String rev = NettyUtil.getMessage(buf);
+        byte[] ac ={'t','e','s','t'};
+        ByteBuf nb =buf.copy().writeBytes(ac);
+
+        ctx.writeAndFlush(nb);
+
 //        buf.resetReaderIndex();
         System.err.println("服务端收到客户端消息:"+rev);
 
